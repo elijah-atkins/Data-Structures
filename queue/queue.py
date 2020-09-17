@@ -24,25 +24,25 @@ return elements in First In First Out order.
    as the underlying storage structure.
    Make sure the Queue tests pass."""
 
-from singly_linked_list import LinkedList
+# from singly_linked_list import LinkedList
 
-class Queue:
-    def __init__(self):
-        self.size = 0
-        self.storage = LinkedList()
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = LinkedList()
 
-    def __len__(self):
-        return self.size
+#     def __len__(self):
+#         return self.size
 
-    def enqueue(self, value):
-        self.storage.add_to_head(value)
-        self.size += 1
+#     def enqueue(self, value):
+#         self.storage.add_to_tail(value)
+#         self.size += 1
 
-    def dequeue(self):
-        if self.size == 0:
-            return None
-        self.size -= 1
-        return self.storage.remove_head()
+#     def dequeue(self):
+#         if self.size == 0:
+#             return None
+#         self.size -= 1
+#         return self.storage.remove_head()
 
 """
 3. What is the difference between using an array vs. a linked list when 
@@ -54,3 +54,38 @@ class Queue:
 Stretch: What if you could only use instances of your Stack class to implement the Queue?
          What would that look like? How many Stacks would you need? Try it!
 """
+
+#Stretch: Queue (using a stack)
+
+from stack import Stack
+
+class Queue:
+    def __init__(self):
+        self.size = 0
+        self.storage = Stack()
+        self.temp_storage = Stack()
+
+    # len performance: O(1)
+    def __len__(self):
+        return self.size
+
+    # enqueue performance: O(1)
+    def enqueue(self, value):
+        self.storage.push(value)
+        self.size += 1
+
+    # dequeue performance: O(n)
+    def dequeue(self):
+        if self.size == 0:
+            return None
+
+        self.size -= 1
+
+        while len(self.storage) > 1:
+            self.temp_storage.push(self.storage.pop())
+        elem_popped = self.storage.pop()
+
+        while len(self.temp_storage) > 0:
+            self.storage.push(self.temp_storage.pop())
+
+        return elem_popped 

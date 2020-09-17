@@ -56,6 +56,8 @@ class LinkedList:
             # update the "self.tail" to point to the new node that we just added
             self.tail = new_node
 
+
+
     def remove_tail(self):
         """
         remove the last node in the chain and return its value

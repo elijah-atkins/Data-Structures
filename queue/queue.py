@@ -53,6 +53,7 @@ return elements in First In First Out order.
    
 Stretch: What if you could only use instances of your Stack class to implement the Queue?
          What would that look like? How many Stacks would you need? Try it!
+         I needed two stacks
 """
 
 #Stretch: Queue (using a stack)
@@ -81,10 +82,13 @@ class Queue:
 
         self.size -= 1
 
+        # take all but one item out of storage stack and put values in temp_storage stack
         while len(self.storage) > 1:
             self.temp_storage.push(self.storage.pop())
+        # remove last item from storage stack and store and elem_popped
         elem_popped = self.storage.pop()
 
+        # take all items out of temp_storage stack and put them back in storage stack
         while len(self.temp_storage) > 0:
             self.storage.push(self.temp_storage.pop())
 

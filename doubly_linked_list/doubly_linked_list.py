@@ -117,13 +117,19 @@ class DoublyLinkedList:
     def add_to_tail(self, value):
         #wrap the input value in a node
         endNode = ListNode(value)
+        #we have a non-empty list, add the new node to the tail
         if self.head and self.tail:
+            #set the new node's prev to refer to the current tail
             endNode.prev = self.tail
+            #set the current tail's 'next to refer to the endNode (added to make it work with DLL)
             self.tail.next = endNode
+            # set the list's tail reference endNode
             self.tail = endNode
         else:
+            #if the list is initially empty, set both head and tail to endNode
             self.head = endNode
             self.tail = endNode
+        #increment the length
         self.length += 1
             
     """
@@ -132,20 +138,32 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_tail(self):
+        #check if tail exist
         if self.tail:
+            #get tail value
             tailValue = self.tail.get_value()
+            #check to see if node has head or tail
             if self.length > 1:
+                #get pevious tail
                 newTail = self.tail.get_previous()
+                #remove self
                 self.tail.delete()
+                #redefine tail as newTail
                 self.tail = newTail
+                #reduce length by one
                 self.length -= 1
+                #return removed item
                 return tailValue
             else:
+                #if removing last item delete tail and empty head and tail node
                 self.tail.delete()
                 self.head = None
                 self.tail = None
+                #reduce length by one
                 self.length -= 1
+                #return removed item
                 return tailValue
+        #return None if no tail exist
         return None
         
     """
@@ -153,12 +171,16 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
+        #get value of current node
         value = node.value
+        #if node is head node node already in head no changes
         if node == self.head:
             return
+        #if node is the same as the tail remove from tail and add to head
         elif node == self.tail:
             self.remove_from_tail()
             self.add_to_head(value)
+        # if node is not head or tail delete node and move value to head
         else:
             self.delete(node)
             self.add_to_head(value)
@@ -168,12 +190,16 @@ class DoublyLinkedList:
     List and inserts it as the new tail node of the List.
     """
     def move_to_end(self, node):
+        #get value of current node
         value = node.value
+        #if node is tail node node already no changes
         if node == self.tail:
             return
+        #if node is same as head remove node from head and add value to tail
         elif node == self.head:
             self.remove_from_head()
             self.add_to_tail(value)
+        #if node is not head or tail delete node and move value to tail
         else:
             self.delete(node)
             self.add_to_tail(value)
@@ -183,17 +209,23 @@ class DoublyLinkedList:
     order of the other elements of the List.
     """
     def delete(self, node):
+        # if nothing exist return nothing
         if self.length == 0:
             return
+        # if one item exist clear head and tail and delete current item
         elif self.length == 1:
             self.head = None
             self.tail = None
             node.delete()
+            #reduce length by 1
             self.length -= 1
+        # if item is head remove from head
         elif self.head == node:
             self.remove_from_head()
+        # if item is tail remove from tail
         elif self.tail == node:
             self.remove_from_tail()
+        #if item is in any other postion delete node and reduce length
         else:
             node.delete()
             self.length -= 1

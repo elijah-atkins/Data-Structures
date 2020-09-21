@@ -23,6 +23,7 @@ class ListNode:
             return self.prev
         return None
     
+    #delete all values in currend node and update links in previous and next node
     def delete(self):
         #check if current node has a prev and next
         #redefine previous node to point to node next to deleted one

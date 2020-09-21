@@ -5,20 +5,31 @@ return elements in First In First Out order.
 1. Implement the Queue class using an array as the underlying storage structure.
    Make sure the Queue tests pass."""
 
-# class Queue:
-#     def __init__(self):
-#         self.storage = []
+class Queue:
+    #constructor
+    def __init__(self):
+        #initializing attributes of queue only need an array to store values
+        self.storage = []
     
-#     def __len__(self):
-#         return len(self.storage)
+    #define stack __len__ method
+    def __len__(self):
+        #use array method to find and return length
+        return len(self.storage)
 
-#     def enqueue(self, value):
-#         return self.storage.append(value)
+    #defining enqueue method to add item
+    def enqueue(self, value):
+        #add value to end of array and return full array
+        return self.storage.append(value)
 
-#     def dequeue(self):
-#         if len(self.storage) == 0:
-#             return None
-#         return self.storage.pop(0)
+    #defining enqueue method to remove item
+    def dequeue(self):
+        #if array is empty return None
+        if len(self.storage) == 0:
+            return None
+        #if array is not empty remove and return first item in array
+        return self.storage.pop(0)
+
+
 """
 2. Re-implement the Queue class, this time using the linked list implementation
    as the underlying storage structure.
@@ -26,23 +37,38 @@ return elements in First In First Out order.
 
 from singly_linked_list import LinkedList
 
-# class Queue:
-#     def __init__(self):
-#         self.size = 0
-#         self.storage = LinkedList()
+class Queue:
+    #constructor
+    def __init__(self):
+        #initialze the attributes of stack
+        self.size = 0
+        #create storage from an instance of LinkedList
+        self.storage = LinkedList()
 
-#     def __len__(self):
-#         return self.size
+    #define stack __len__method
+    def __len__(self):
+        #return size attribute
+        return self.size
 
-#     def enqueue(self, value):
-#         self.storage.add_to_tail(value)
-#         self.size += 1
+    #define enqueue method to add value
+    def enqueue(self, value):
+        #use method in linked list to store value in tail
+        self.storage.add_to_tail(value)
+        #increase storage size by 1
+        self.size += 1
+        #return the full array
+        return self.storage
 
-#     def dequeue(self):
-#         if self.size == 0:
-#             return None
-#         self.size -= 1
-#         return self.storage.remove_head()
+    #define dequeue method to remove value
+    def dequeue(self):
+        #if no items in array return None
+        if self.size == 0:
+            return None
+        #reduce size by one
+        self.size -= 1
+        #remove item from head
+        #First in Last out behavior
+        return self.storage.remove_head()
 
 
 # class Queue(LinkedList):

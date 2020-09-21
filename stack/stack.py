@@ -30,7 +30,7 @@ class Stack:
         if len(self.storage) == 0:
             return None
         #if array is not empty remove and return last item in array      
-        return self.storage.pop()
+        return self.storage.pop(-1)#pop() will use index -1 and remove last item by default
     #define peek method to show storage value at end of array  
     def peek(self):
         return self.storage[-1]
@@ -56,8 +56,8 @@ class Stack:
 
     #define push method to add value
     def push(self, value):
-        #use method in linked list to store value in head
-        self.storage.add_to_head(value)
+        #use method in linked list to store value in tail
+        self.storage.add_to_tail(value)
         #increase storage size by 1
         self.size += 1
         #return the full array
@@ -69,13 +69,13 @@ class Stack:
             return None
         self.size -= 1
         #use method in linked list to remove value
-        #removing from head because push function adds to head for
+        #removing from tail because push function adds to tail for
         #First in first out behavior
-        return self.storage.remove_head()
+        return self.storage.remove_tail()
     
     #define peek to show contents of storage
     def peek(self):
-        return self.storage.
+        return self.storage
 """
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?

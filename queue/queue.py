@@ -24,7 +24,7 @@ return elements in First In First Out order.
    as the underlying storage structure.
    Make sure the Queue tests pass."""
 
-# from singly_linked_list import LinkedList
+from singly_linked_list import LinkedList
 
 # class Queue:
 #     def __init__(self):
@@ -44,6 +44,23 @@ return elements in First In First Out order.
 #         self.size -= 1
 #         return self.storage.remove_head()
 
+
+# class Queue(LinkedList):
+#     def __init__(self):
+#         super().__init__()
+#         self.size = 0
+#     def __len__(self):
+#         return self.size
+
+#     def enqueue(self, value):
+#         self.add_to_tail(value)
+#         self.size += 1
+
+#     def dequeue(self):
+#         if self.size == 0:
+#             return None
+#         self.size -= 1
+#         return self.remove_head()
 """
 3. What is the difference between using an array vs. a linked list when 
    implementing a Queue?

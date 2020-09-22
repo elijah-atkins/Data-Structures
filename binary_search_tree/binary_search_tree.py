@@ -25,16 +25,16 @@ class BSTNode:
         #the right subtree of a node contains only nodes with a value greater than the node's value
         #the left and right subtree each must also be a binary search tree
     def insert(self, value):
-        if value <= self.value:
-            if self.left:
-                self.left.insert(value)
-            else:
-                self.left = BSTNode(value)
-        elif value > self.value:
+        if value >= self.value:
             if self.right:
                 self.right.insert(value)
             else:
                 self.right = BSTNode(value)
+        elif value < self.value:
+            if self.left:
+                self.left.insert(value)
+            else:
+                self.left = BSTNode(value)
 
 
 
@@ -55,37 +55,38 @@ class BSTNode:
 
 
     # Return the maximum value found in the tree
-    def get_max(self):
-        #check if head exist if not assume empty return None
-        if not self.right:
-            return None
-        #set initial max value as item in head
-        max_value = self.right.value
-        #start at head
-        current_node = self.right
-        while current_node:
-            if current_node.value > max_value:
-                #check value in current node if greater than 
-                #max_value set current value as new max
-                max_value = current_node.value
-            #cycle to next node
-            current_node = current_node.get_next()
-        #return higest value
-        return max_value
-
-
-
-
-    #     #recursive 
     # def get_max(self):
+    #     #check if head exist if not assume empty return None
+    #     # if not self.right:
+    #     #     return None
+    #     #set initial max value as item in head
+    #     max_value = self.right.value
+    #     #start at head
+    #     current_node = self.right
+    #     while current_node:
+    #         if current_node.value > max_value:
+    #             #check value in current node if greater than 
+    #             #max_value set current value as new max
+    #             max_value = current_node.value
+    #         #cycle to next node
+    #         current_node = current_node.get_next()
+    #     #return higest value
+    #     return max_value
 
-    #     if self.right is None:
-    #         return self.value
-    #     return self.right.get_max()
+
+
+
+        #recursive 
+    def get_max(self):
+
+        if self.right is None:
+            return self.value
+        return self.right.get_max()
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
         #call the function passing in the current nodes value
+        fn(self.value)
         #if there is a node to the left call the function on left value
         if self.left:
             self.left.for_each(fn)
@@ -130,18 +131,18 @@ This code is necessary for testing the `print` methods
 """
 bst = BSTNode(1)
 
-bst.insert(2)
-bst.insert(3)
-bst.insert(8)
-bst.insert(4)
-bst.insert(5)
-bst.insert(6)
-bst.insert(7)
-bst.bft_print()
-bst.dft_print()
+bst.insert(1)
+bst.insert(1)
+# bst.insert(8)
+# bst.insert(4)
+# bst.insert(5)
+# bst.insert(6)
+# bst.insert(7)
+# bst.bft_print()
+# bst.dft_print()
 
+# print(bst.for_each(bst.get_max()))
 
-print(bst.get_max())
 
 
 

@@ -29,6 +29,8 @@ class BinarySearchTreeTests(unittest.TestCase):
         self.assertFalse(self.bst.contains(8))
 
     def test_get_max(self):
+        print(self.bst.get_max())
+
         self.assertEqual(self.bst.get_max(), 5)
         self.bst.insert(30)
         self.assertEqual(self.bst.get_max(), 30)

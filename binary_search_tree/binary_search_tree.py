@@ -96,7 +96,9 @@ class BSTNode:
             self.right.for_each(fn)
 
     # Part 2 -----------------------
-
+    import sys
+    sys.path.append('/Users/elijahatkins/LambdaSchool/Data-Structures/stack')
+    from stack import Stack
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):

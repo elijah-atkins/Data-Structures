@@ -39,7 +39,9 @@ class Stack:
 2. Re-implement the Stack class, this time using the linked list implementation
    as the underlying storage structure.
    Make sure the Stack tests pass."""
-
+import sys
+sys.path.append('/Users/elijahatkins/LambdaSchool/Data-Structures/singly_linked_list')
+print(sys.path)
 from singly_linked_list import LinkedList
 class Stack:
     #constrctor

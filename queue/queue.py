@@ -34,7 +34,9 @@ class Queue:
 2. Re-implement the Queue class, this time using the linked list implementation
    as the underlying storage structure.
    Make sure the Queue tests pass."""
-
+import sys
+sys.path.extend(['/Users/elijahatkins/LambdaSchool/Data-Structures/singly_linked_list', '/Users/elijahatkins/LambdaSchool/Data-Structures/stack'])
+from stack import Stack
 from singly_linked_list import LinkedList
 
 class Queue:

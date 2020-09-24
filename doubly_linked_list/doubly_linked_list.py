@@ -7,22 +7,14 @@ class ListNode:
         self.prev = prev
         self.value = value
         self.next = next
-    
 
-    #helper functions
-    def get_value(self):
-        return self.value
-
+    #helper methods
     def get_next(self):
         if self.next:
             return self.next
         return None
     
-    def get_previous(self):
-        if self.prev:
-            return self.prev
-        return None
-    
+    #DRY code
     #delete all values in currend node and update links in previous and next node
     def delete(self):
         #check if current node has a prev and next
@@ -59,20 +51,20 @@ class DoublyLinkedList:
     """
     def add_to_head(self, value):
         #wrap the input value in a node
-        root = ListNode(value)
+        new_node = ListNode(value)
         #we have a non-empty list, add the new node to the head
         if self.head and self.tail:
             #set the new node's 'next to refer to the current head
-            root.next = self.head
+            new_node.next = self.head
             #set the current head's 'prev to refer to the new_node (added to make it work with DLL)
-            self.head.prev = root
+            self.head.prev = new_node
              # set the list's head reference to the new node  
-            self.head = root
+            self.head = new_node
         #check if the linked list is empty
         else:
             #if the list is initially empty, set both head and tail to the new node
-            self.head = root
-            self.tail = root
+            self.head = new_node
+            self.tail = new_node
         #increment the length
         self.length +=1
         
@@ -82,33 +74,12 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_head(self):
-        #check if head exist
-        if self.head:
-            #get head value
-            headValue = self.head.get_value()
-            #check to see if node has head or tail
-            if self.length > 1:
-                #get next head 
-                newHead = self.head.get_next()
-                #remove self
-                self.head.delete()
-                #redefine head as previously stored newHead
-                self.head = newHead
-                #reduce length by 1
-                self.length -= 1
-                #return removed item
-                return headValue
-            else:
-                #if removing last item delete head and empty head and tail node
-                self.head.delete()
-                self.head = None
-                self.tail = None
-                #reduce length by 1
-                self.length -= 1
-                #return removed item
-                return headValue
-        #return None if no head exist
-        return None
+        #find value of head
+        value = self.head.value
+        #remove head with ListNodes delete function
+        self.delete(self.head)
+        return value
+
             
     """
     Wraps the given value in a ListNode and inserts it 
@@ -139,33 +110,12 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_tail(self):
-        #check if tail exist
-        if self.tail:
-            #get tail value
-            tailValue = self.tail.get_value()
-            #check to see if node has head or tail
-            if self.length > 1:
-                #get pevious tail
-                newTail = self.tail.get_previous()
-                #remove self
-                self.tail.delete()
-                #redefine tail as newTail
-                self.tail = newTail
-                #reduce length by one
-                self.length -= 1
-                #return removed item
-                return tailValue
-            else:
-                #if removing last item delete tail and empty head and tail node
-                self.tail.delete()
-                self.head = None
-                self.tail = None
-                #reduce length by one
-                self.length -= 1
-                #return removed item
-                return tailValue
-        #return None if no tail exist
-        return None
+        #find value of tail
+        value = self.tail.value
+        #remove tail with ListNodes delete function and return value
+        self.delete(self.tail)
+        return value
+
         
     """
     Removes the input node from its current spot in the 
@@ -210,26 +160,24 @@ class DoublyLinkedList:
     order of the other elements of the List.
     """
     def delete(self, node):
-        # if nothing exist return nothing
-        if self.length == 0:
+        #check if node is empty and return and do nothing
+        if not self.head and not self.tail:
             return
-        # if one item exist clear head and tail and delete current item
-        elif self.length == 1:
+        #check for only one item, set head and tail to none to make empty list
+        if self.head is self.tail:
             self.head = None
             self.tail = None
+        #if node has head assign head to next node
+        elif self.head is node:
+            self.head = node.next
             node.delete()
-            #reduce length by 1
-            self.length -= 1
-        # if item is head remove from head
-        elif self.head == node:
-            self.remove_from_head()
-        # if item is tail remove from tail
-        elif self.tail == node:
-            self.remove_from_tail()
-        #if item is in any other postion delete node and reduce length
+        #if node has tail assigin tail to prev node
+        elif self.tail is node:
+            self.tail = node.prev
+            node.delete()
         else:
             node.delete()
-            self.length -= 1
+        self.length -= 1
 
     """
     Finds and returns the maximum value of all the nodes 

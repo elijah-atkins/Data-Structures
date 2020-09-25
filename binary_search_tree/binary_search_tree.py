@@ -10,7 +10,7 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 import sys
-sys.path.append('/Users/elijahatkins/LambdaSchool/Data-Structures/stack')
+sys.path.extend(['/Users/elijahatkins/LambdaSchool/Data-Structures/stack','/Users/elijahatkins/LambdaSchool/Data-Structures/queue'])
 from queue import Queue
 from stack import Stack
 
@@ -22,7 +22,7 @@ class BSTNode:
         self.right = None
 
     # Insert the given value into the tree
-        # the left and right subtree each must also be a binary search tree
+    # the left and right subtree each must also be a binary search tree
     def insert(self, value):
         # the right subtree of a node contains only nodes with a value greater than the node's value
         if value >= self.value:
@@ -58,11 +58,14 @@ class BSTNode:
    # iterative aproach
 
     def get_max(self):
+        #while loop returns first node without a right node
         while self.right:
             self = self.right
+            #return the value of right most node
         return self.value
 
     # recursive aproach
+    #this one looks for first value that doesn't have a right
     # def get_max(self):
     #     if not self.right:
     #         return self.value
@@ -135,15 +138,38 @@ class BSTNode:
 
     # Stretch Goals -------------------------
     # Note: Research may be required
-
+#https://www.techiedelight.com/preorder-tree-traversal-iterative-recursive/
     # Print Pre-order recursive DFT
+    def pre_order_dft(self): 
+    # Recursive function to perform pre-order traversal of the tree
+    # return if the current node is empty
+        if self is None:
+            return
+        # Display the data part of the root (or current node)
+        print(self.value)
+        # Traverse the left subtree
+        if self.left:
+            self.left.pre_order_dft()
+        # Traverse the right subtree
+        if self.right:
+            self.right.pre_order_dft()
 
-    def pre_order_dft(self):
-        pass
-
+#https://www.techiedelight.com/postorder-tree-traversal-iterative-recursive/
     # Print Post-order recursive DFT
     def post_order_dft(self):
         pass
+    # Recursive function to perform post-order traversal of the tree
+    # return if the current node is empty
+        if self is None:
+            return
+        # Traverse the left subtree
+        if self.left:
+            self.left.post_order_dft()
+        # Traverse the right subtree
+        if self.right:
+            self.right.post_order_dft()
+    # Display the data part of the root (or current node)
+        print(self.value)
 
 
 """
